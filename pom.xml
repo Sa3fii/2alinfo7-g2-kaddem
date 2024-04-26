@@ -48,7 +48,10 @@
         </dependency>
     </dependencies>
     <distributionManagement>
+        <repository>
+            <id>internal.repo</id>
             <url>http://172.17.0.5:8081/repository/maven-releases/</url>
+        </repository>
     </distributionManagement>
 
     <build>
