@@ -48,7 +48,10 @@
         </dependency>
     </dependencies>
     <distributionManagement>
-            <url>http://172.17.0.5:8081/repository/maven-releases/</url>
+        <repository>
+            <id>internal.repo</id>
+            <url>http://localhost:8081/repository/devops_repo/</url>
+        </repository>
     </distributionManagement>
 
     <build>
@@ -65,6 +68,16 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin> 
+                <groupId>org.apache.maven.plugins</groupId> 
+                <artifactId>maven-surefire-plugin</artifactId> 
+                <version>2.14.1</version> 
+                <configuration> 
+                <includes> 
+                <include>**/*Test.java</include> 
+                </includes> 
+                </configuration> 
+            </plugin> 
         </plugins>
     </build>
 
