@@ -48,7 +48,9 @@
         </dependency>
 
     </dependencies>
-
+    <distributionManagement>
+    <url>http://127.0.0.1:8081/repository/maven-releases/</url>
+    </distributionManagement>     
     <build>
         <plugins>
             <plugin>
