@@ -46,8 +46,10 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.9</version>
         </dependency>
-
     </dependencies>
+    <distributionManagement>
+            <url>http://172.17.0.5:8081/repository/maven-releases/</url>
+    </distributionManagement>
 
     <build>
         <plugins>
