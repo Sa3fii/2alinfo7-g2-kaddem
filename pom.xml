@@ -49,7 +49,7 @@
     </dependencies>
     <distributionManagement>
         <repository>
-            <id>internal.repo</id>
+            <id>deploymentRepo</id>
             <url>http://localhost:8081/repository/devops_repo/</url>
         </repository>
     </distributionManagement>
