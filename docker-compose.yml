@@ -16,6 +16,17 @@ services:
     restart: on-failure
     ports:
       - 8089:8089
+    environment:
+      SPRING_APPLICATION_JSON: '{
+           spring.datasource.url=jdbc:mysql://mysqldb:3306/kaddem\db?&createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+           "spring.datasource.username": "root",
+           "spring.datasource.password": root,
+           "spring.jpa.show-sql": true,
+           "spring.jpa.hibernate.ddl-auto": "update",
+           "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect"
+        }'
+    stdin_open: true
+    tty: true
   # angularfrontend: # Define the Angular frontend service
   #   container_name: my-angular-app
   #   image: mouadh21/achatfront:1.0.0
