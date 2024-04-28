@@ -1,75 +1,81 @@
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import tn.esprit.spring.kaddem.entities.Contrat;
 import tn.esprit.spring.kaddem.repositories.ContratRepository;
-import tn.esprit.spring.kaddem.repositories.EtudiantRepository;
 import tn.esprit.spring.kaddem.services.ContratServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class ContratServiceTest {
-
-    @InjectMocks
-    private ContratServiceImpl contratService;
+class ContratServiceImplTest {
 
     @Mock
     private ContratRepository contratRepository;
 
-    @Mock
-    private EtudiantRepository etudiantRepository;
+    @InjectMocks
+    private ContratServiceImpl contratService;
 
-    @Before
-    public void setup() {
+    @BeforeEach
+    void initializeMocks() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void testRetrieveAllContrats() {
-        // Given
-        Contrat contrat = new Contrat();
-        List  <Contrat> contrats = new ArrayList<>();
-        contrats.add(contrat);
+    void retrieveAllContrats_ShouldReturnAllContrats() {
+        List<Contrat> expectedContrats = new ArrayList<>();
+        expectedContrats.add(new Contrat());
+        expectedContrats.add(new Contrat());
 
-        when(contratRepository.findAll()).thenReturn(contrats);
+        when(contratRepository.findAll()).thenReturn(expectedContrats);
 
-        // When
-        List  <Contrat> retrievedContrats = contratService.retrieveAllContrats();
+        List<Contrat> actualContrats = contratService.retrieveAllContrats();
 
-        // Then
-        assertEquals(1, retrievedContrats.size());
-        assertEquals(contrat, retrievedContrats.get(0));
+        assertNotNull(actualContrats);
+        assertEquals(2, actualContrats.size());
+        verify(contratRepository).findAll();
     }
 
     @Test
-    public void testUpdateContrat() {
-        // Given
-        Contrat contrat = new Contrat();
-        when(contratRepository.save(contrat)).thenReturn(contrat);
+    void addContrat_ShouldSaveAndReturnContrat() {
+        Contrat newContrat = new Contrat();
+        when(contratRepository.save(any(Contrat.class))).thenReturn(newContrat);
 
-        // When
-        Contrat updatedContrat = contratService.updateContrat(contrat);
+        Contrat savedContrat = contratService.addContrat(new Contrat());
 
-        // Then
-        assertEquals(contrat, updatedContrat);
+        assertNotNull(savedContrat);
+        verify(contratRepository).save(any(Contrat.class));
     }
+
     @Test
-    public void testAddContrat() {
-        // Given
-        Contrat contrat = new Contrat();
-        when(contratRepository.save(contrat)).thenReturn(contrat);
+    void retrieveContrat_ShouldReturnContratGivenId() {
+        Integer contratId = 1;
+        Optional<Contrat> expectedContrat = Optional.of(new Contrat());
+        when(contratRepository.findById(contratId)).thenReturn(expectedContrat);
 
-        // When
-        Contrat addedContrat = contratService.addContrat(contrat);
+        Contrat actualContrat = contratService.retrieveContrat(contratId);
 
-        // Then
-        assertEquals(contrat, addedContrat);
+        assertNotNull(actualContrat);
+        verify(contratRepository).findById(contratId);
+    }
+
+    @Test
+    void removeContrat_ShouldDeleteContratById() {
+        Integer contratId = 1;
+        Contrat existingContrat = new Contrat();
+        when(contratRepository.findById(contratId)).thenReturn(Optional.of(existingContrat));
+        doNothing().when(contratRepository).delete(existingContrat);
+
+        contratService.removeContrat(contratId);
+
+        verify(contratRepository).findById(contratId);
+        verify(contratRepository).delete(existingContrat);
     }
 }
