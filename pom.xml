@@ -74,12 +74,12 @@
         </dependency>
     </dependencies>
     <distributionManagement>
-        <repository>
-            <id>deploymentRepo</id>
-            <url>http://localhost:8081/repository/devops_repo/</url>
-        </repository>
-    </distributionManagement>
-
+		<repository>
+			<id>deploymentRepo</id>
+			<name>Nexus repo</name>
+			<url>http://localhost:8081/repository/maven-repo/</url>
+		</repository>
+	</distributionManagement>
     <build>
         <plugins>
             <plugin>
