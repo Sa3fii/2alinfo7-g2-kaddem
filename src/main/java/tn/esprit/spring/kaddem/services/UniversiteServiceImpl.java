@@ -39,12 +39,13 @@ return  u;
         universiteRepository.delete(retrieveUniversite(idUniversite));
     }
 
-    public void assignUniversiteToDepartement(Integer idUniversite, Integer idDepartement){
-        Universite u= universiteRepository.findById(idUniversite).orElse(null);
-        Departement d= departementRepository.findById(idDepartement).orElse(null);
-        u.getDepartements().add(d);
-        universiteRepository.save(u);
-    }
+    public void assignUniversiteToDepartement(Integer idUniversite, Integer idDepartement) {
+    Universite u = universiteRepository.findById(idUniversite).orElseThrow(() -> new IllegalArgumentException("No Universite found with id: " + idUniversite));
+    Departement d = departementRepository.findById(idDepartement).orElseThrow(() -> new IllegalArgumentException("No Departement found with id: " + idDepartement));
+    u.getDepartements().add(d);
+    universiteRepository.save(u);
+}
+
 
     public Set<Departement> retrieveDepartementsByUniversite(Integer idUniversite){
 Universite u=universiteRepository.findById(idUniversite).orElse(null);
