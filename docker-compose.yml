@@ -9,7 +9,7 @@ services:
     volumes:
       - /home/mysql/data:/var/lib/mysql
 
-  kaddem-app:
+  kaddemapp:
     depends_on:
       - mysqldb
     image: ahmed438/kaddem:1.0.0
