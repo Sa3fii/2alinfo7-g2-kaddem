@@ -51,7 +51,7 @@
     <distributionManagement>
         <repository>
             <id>deploymentRepo</id>
-            <url>http://localhost:8081/repository/maven-nexus-projet/</url>
+            <url>http://192.168.183.52:8081/#browse/browse:maven-nexus-projet</url>
         </repository>
     </distributionManagement>
     <build>
