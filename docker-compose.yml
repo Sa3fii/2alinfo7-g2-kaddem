@@ -12,7 +12,7 @@ services:
   kaddem-app:
     depends_on:
       - mysqldb
-    image: eyaHaffar/kaddem:1.0.0
+    image: eyahaffaresprit/kaddem:1.0.0
     container_name: kaddem
     restart: on-failure
     ports:
