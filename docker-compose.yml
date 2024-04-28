@@ -1,3 +1,4 @@
+version:  "3.9"
 services:
   mysqldb:
     container_name: mysqldb
@@ -9,7 +10,7 @@ services:
     volumes:
       - /home/mysql/data:/var/lib/mysql
 
-  kaddemapp:
+  kaddem-app:
     depends_on:
       - mysqldb
     image: ahmed438/kaddem:1.0.0
