@@ -49,8 +49,10 @@
 
     </dependencies>
     <distributionManagement>
-    <id>deploymentRepo</id>
-             <url>http://localhost:8081/repository/maven-nexus-project/</url>
+        <repository>
+            <id>deploymentRepo</id>
+            <url>http://localhost:8081/repository/maven-nexus-project/</url>
+        </repository>
     </distributionManagement>
     <build>
         <plugins>
